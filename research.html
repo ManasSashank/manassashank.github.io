@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research &amp; Projects | Manas Sashank Juvvi</title>
+<meta name="description" content="Seven robotics projects covering certified reinforcement learning, temporal-logic planning, safe multi-robot exploration, F1TENTH racing, an outdoor rover, rough-terrain autonomy and multi-drone pick-and-place.">
+<meta name="author" content="Manas Sashank Juvvi">
+<meta property="og:title" content="Research &amp; Projects | Manas Sashank Juvvi">
+<meta property="og:description" content="Seven robotics projects covering certified reinforcement learning, temporal-logic planning, safe multi-robot exploration, F1TENTH racing, an outdoor rover, rough-terrain autonomy and multi-drone pick-and-place.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='8' y='8' width='8' height='8' rx='1' fill='none' stroke='%230F4C91' stroke-width='2'/%3E%3Cpath d='M1 12h7M16 12h7M12 1v7M12 16v7' stroke='%230F4C91' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.className+=" js";</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap masthead__inner">
+    <a class="wordmark" href="index.html"><svg class="wordmark__glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="8" y="8" width="8" height="8" rx="1" stroke="#0F4C91" stroke-width="1.6"/><path d="M1 12h7M16 12h7M12 1v7M12 16v7" stroke="#0F4C91" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="1.6" fill="#AE3A2C"/></svg><span>Manas Juvvi</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a class="nav__link" href="index.html">Home</a>
+      <a class="nav__link" href="research.html" aria-current="page">Research</a>
+      <a class="nav__link" href="publications.html">Publications</a>
+      <a class="nav__link" href="experience.html">Experience</a>
+      <a class="nav__link" href="contact.html">Contact</a>
+      <a class="nav__cv" href="assets/cv/cv.pdf">CV &#8599;</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow rise">Projects</p>
+    <h1 class="page-head__title rise">Research &amp; projects</h1>
+    <p class="page-head__lede rise">
+      Seven projects, from formal guarantees to hardware in the field. Each one sets out the problem, what I built and what it achieved. Click any figure to enlarge it.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="projects">
+
+      <article class="project rise" id="thesis">
+        <div class="project__text">
+          <h3 class="project__title">A statistical framework for counterexample driven refinement of RL controllers</h3>
+          <p class="project__meta">Nov 2025 to Aug 2026 &middot; MSc thesis, TU Delft &middot; Grade 8.5/10 &middot; Mentor Dr. Manuel Mazo Espinosa</p>
+          <div class="project__body">
+            <p><strong>The problem.</strong> Reinforcement learning solves robotic tasks that classical methods struggle with, but it is rarely trusted in safety-critical settings, because a trained policy comes with no guarantee that it meets a formal requirement. Classical formal methods can supply that guarantee, yet their cost becomes impractical for high-dimensional systems or for robots whose dynamics are unknown.</p>
+            <p><strong>What I built.</strong> An iterative train, certify and refine loop for policies subject to bounded-horizon signal temporal logic specifications, treating the robot as a black box. A policy is trained to maximise STL satisfaction, then certified from a finite number of rollouts drawn from the true distribution of starting configurations, which yields a distribution-free PAC bound on how often the specification is violated. When certification fails, the same rollouts locate the region of initial conditions where the policy is weakest. The policy is retrained with emphasis there, using continual learning so that already certified behaviour is preserved, and the loop repeats until the certificate holds or the iteration budget runs out.</p>
+            <ul><li>Needs no model of the system, so it applies wherever a policy can be rolled out.</li><li>Evaluated on a differential-drive robot in obstacle-filled arenas, under multi-objective specifications combining reach-avoid, stay and safety requirements.</li><li>Graduation committee of Dr. Manuel Mazo Espinosa, Dr. Luca Laurenti and Dr. Christian Pek.</li></ul>
+          </div>
+          <p class="project__result"><strong>Result.</strong> 44% higher mean task robustness than the leading baseline, TGPO*, with 4&times; lower compute time. Graded 8.5/10.</p>
+          <div class="linkset"><a href="https://repository.tudelft.nl/record/uuid:e67b072a-05b1-430f-a1fb-e25cd8df5b10">Read the thesis</a></div>
+        </div>
+      </article>
+      <article class="project project--gallery rise" id="stl-planning">
+        <div class="project__text">
+          <h3 class="project__title">Planning with deadlines for robots without a model</h3>
+          <p class="project__meta">Sep 2023 to Mar 2024 &middot; IISc &middot; IROS 2025, equal-contribution first author &middot; Python, PyTorch, PPO, ROS Noetic</p>
+          <div class="project__body">
+            <p><strong>The problem.</strong> Real tasks come with timing. Reach a station between 20 and 25 seconds, stay clear of an area while maintenance is running, be back at the start before the shift ends. Signal temporal logic (STL) states such tasks precisely, but existing STL planners either need an accurate dynamics model or, when built on end-to-end reinforcement learning, must be retrained whenever the task or the map changes.</p>
+            <p><strong>What I built.</strong> A two-phase co-design of planning and control. First, reinforcement learning trains a library of motion-primitive policies once per robot, for driving forward, backward and turning at several speeds, and learned reachability-time estimators predict how long each policy needs to cover a given distance. Second, an RRT*-style planner grows a tree through space and time, timestamps every node with those estimators, and keeps the plan with the highest STL robustness. If the robot drifts too far from the plan, it replans from where it stands.</p>
+            <ul><li>Entirely model-free. The same policy library is reused across tasks and environments without retraining.</li><li>Tested on a TurtleBot3 with goals in fixed time windows, a timed obstacle and a return-to-start task, and on a Unitree Go1 quadruped that replanned to bridge the sim-to-real gap.</li><li>Probabilistically complete as the number of samples grows.</li></ul>
+          </div>
+          <p class="project__result"><strong>Result.</strong> Plans generated in 4.8&nbsp;s on average for the first task and 3.6&nbsp;s for the second, with every specification satisfied on real hardware.</p>
+          <div class="linkset"><a href="https://ieeexplore.ieee.org/document/11247417">Paper</a><a href="https://arxiv.org/abs/2507.13225">arXiv</a><a href="https://youtu.be/xo2cXRYdDPQ">Watch the video</a></div>
+        </div>
+        <div class="project__media">
+          <figure class="shot shot--crop"><img src="assets/img/projects/stl-quadruped-arena.jpg" alt="Unitree Go1 quadruped in a test arena with two static obstacles, a timed obstacle and a goal region" loading="lazy" decoding="async"><figcaption>Unitree Go1 in the test arena. It must reach G while avoiding two static obstacles and a timed obstacle TO.</figcaption></figure>
+          <figure class="shot "><img src="assets/img/projects/stl-turtlebot-plan.jpg" alt="Plot of planned and executed TurtleBot3 paths with timestamps, reaching two goals within their time windows" loading="lazy" decoding="async"><figcaption>TurtleBot3. Planned (orange) and executed (blue) paths with timestamps, reaching G1 and G2 inside their windows.</figcaption></figure>
+          <figure class="shot "><img src="assets/img/projects/stl-quadruped-plan.jpg" alt="Plot of the quadruped's planned and executed path around a timed obstacle to the goal" loading="lazy" decoding="async"><figcaption>Go1 plan and execution, including the replanned segment around the timed obstacle.</figcaption></figure>
+        </div>
+      </article>
+      <article class="project project--gallery rise" id="multi-robot">
+        <div class="project__text">
+          <h3 class="project__title">Multi-robot exploration with safety guarantees</h3>
+          <p class="project__meta">Apr 2023 to Sep 2023 &middot; IISc &middot; ICRA 2024, equal-contribution first author &middot; C++, Python, ROS Noetic, GMapping</p>
+          <div class="project__body">
+            <p><strong>The problem.</strong> Frontier-based exploration sends robots toward the edge of the known map without knowing what lies beyond it. A robot that rounds a corner can meet an obstacle it has no room to avoid, and teammates sharing the space add more risk. Most exploration methods accept this and lean on heuristics.</p>
+            <p><strong>What I built.</strong> A modular framework where safety is designed in rather than tested afterwards. A Safe Frontier Target Detector places each target inside a safety window computed from the robot's reachable set, so no admissible input can carry the robot from the target into unmapped space. Symbolic models, linked to each robot through feedback refinement relations, give correct-by-construction controllers that respect dynamics, state and input limits, sampling time and sensor noise. The individual controllers are then composed under a barrier-style condition on inter-robot distance, and a final controller for the whole team guarantees that every robot still reaches its target.</p>
+            <ul><li>Targets are ranked to finish small unexplored pockets first, which stops robots oscillating between regions.</li><li>Validated in simulation on mixed teams of two and three robots (a differential-drive TurtleBot3 and omnidirectional robots), and on a two-robot team in the lab.</li><li>Benchmarked against Multi-RRT and frontier-based exploration over 75 runs on three maps with five starting points each.</li></ul>
+          </div>
+          <p class="project__result"><strong>Result.</strong> Zero collisions with obstacles or other robots, exploration in about half the time of both baselines or less, and cleaner maps, since collisions distorted the baselines' maps.</p>
+          <div class="linkset"><a href="https://ieeexplore.ieee.org/document/10610520">Paper</a><a href="https://youtu.be/NX40bgxskQc">Watch the video</a></div>
+        </div>
+        <div class="project__media">
+          <figure class="shot "><img src="assets/img/projects/mre-safe-targets.jpg" alt="Occupancy grid during exploration with a target window inside a safety window next to the frontier" loading="lazy" decoding="async"><figcaption>Exploration in progress. The target window (brown) sits inside a safety window (green), with the frontier window (red) around it.</figcaption></figure>
+          <figure class="shot shot--crop"><img src="assets/img/projects/mre-gazebo-arena.jpg" alt="Gazebo simulation arena with rooms and furniture used for the comparison" loading="lazy" decoding="async"><figcaption>One of the three Gazebo arenas used for the comparison.</figcaption></figure>
+          <figure class="shot shot--free shot--span"><img src="assets/img/projects/mre-comparison.jpg" alt="Bar charts comparing exploration time and collisions per run for three methods in three arenas" loading="lazy" decoding="async"><figcaption>Exploration time and collisions per run against Multi-RRT and frontier-based exploration. Blue is this work, with no collisions in any arena.</figcaption></figure>
+        </div>
+      </article>
+      <article class="project rise" id="f1tenth">
+        <div class="project__text">
+          <h3 class="project__title">Faster, safer racing on F1TENTH</h3>
+          <p class="project__meta">Jun 2023 to Jun 2024 &middot; IISc &middot; Python, ROS, MATLAB</p>
+          <div class="project__body">
+            <p><strong>The problem.</strong> At racing speed a hand-tuned kinematic model stops predicting where the car will actually go, and treating every obstacle as equally dangerous forces the planner to be timid everywhere.</p>
+            <p><strong>What I built.</strong> A data-driven Gaussian-process model of the vehicle that replaced the kinematic model, and a dynamic-obstacle prediction module that scores collision risk across the planner's state space.</p>
+          </div>
+          <p class="project__result"><strong>Result.</strong> More accurate state prediction at high speed, and a planner that drives aggressively where the risk is low and carefully where it is not.</p>
+        </div>
+      </article>
+      <article class="project rise" id="rover">
+        <div class="project__text">
+          <h3 class="project__title">An outdoor robot, from sketch to field test</h3>
+          <p class="project__meta">Jan 2023 to Jun 2024 &middot; IISc &middot; Jetson Xavier NX, OAK-D, Arduino, C++, Python, ROS</p>
+          <div class="project__body">
+            <p><strong>The problem.</strong> The lab needed a research-grade outdoor platform that could read its terrain and react to what it saw.</p>
+            <p><strong>What I built.</strong> I designed and built it end to end, covering electronics, mechanical assembly, low-level control and autonomy. An OAK-D depth camera on a Jetson Xavier NX classifies the terrain and detects target objects. When it spots one, the robot drives towards it and stops at a set distance. Low-level control uses prescribed-performance control, and ROS packages handle navigation and exploration.</p>
+          </div>
+          <p class="project__result"><strong>Result.</strong> A field-tested prototype, hardened against changing light, uneven ground and noisy detections.</p>
+        </div>
+      </article>
+      <article class="project rise" id="eth">
+        <div class="project__text">
+          <h3 class="project__title">Search and rescue on rough terrain</h3>
+          <p class="project__meta">Jun 2025 &middot; ETH Z&uuml;rich Robotics Summer School &middot; Team project</p>
+          <div class="project__body">
+            <p><strong>The problem.</strong> A rough-terrain robot had to carry out a search-and-rescue mission autonomously.</p>
+            <p><strong>What I built.</strong> Selected for a competitive summer school, I worked in a team that brought perception, localisation, mapping, planning and navigation together into one stack on the robot.</p>
+          </div>
+          <p class="project__result"><strong>Result.</strong> The integrated stack carried out the search-and-rescue mission.</p>
+        </div>
+      </article>
+      <article class="project rise" id="eyantra">
+        <div class="project__text">
+          <h3 class="project__title">Vision-guided pick-and-place with a drone fleet</h3>
+          <p class="project__meta">Sep 2021 to Sep 2022 &middot; e-Yantra Robotics Competition, IIT Bombay &middot; Python, OpenCV, ROS, PX4</p>
+          <div class="project__body">
+            <p><strong>The problem.</strong> In the Strawberry Stacker challenge, several quadcopters had to find boxes, pick them up and load them onto trucks.</p>
+            <p><strong>What I built.</strong> Our team located boxes with ArUco markers and trucks with colour and contour detection, then fed those positions into a ROS and PX4 pipeline that guided each drone to its pick and place targets.</p>
+          </div>
+          <p class="project__result"><strong>Result.</strong> Grand Finals, top 8 of more than 250 teams.</p>
+          <div class="linkset"><a href="https://github.com/mrr-codes/eyrc_tasks">Code</a><a href="https://www.youtube.com/watch?v=nvedhA33nsk">Watch the video</a></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <p class="footer__note">&copy; 2026 Manas Sashank Juvvi &middot; Last updated September 2026</p>
+    <div class="footer__links">
+      <a href="mailto:manas.juvvi@gmail.com">Email</a>
+      <a href="https://scholar.google.com/citations?user=y56RUBUAAAAJ">Scholar</a>
+      <a href="https://github.com/ManasSashank">GitHub</a>
+      <a href="https://www.linkedin.com/in/manas-sashank-juvvi-8aa644218">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
