@@ -115,6 +115,50 @@ to the `<article>` and move the media block after the text. Figure shape classes
 `shot--free` (keep the image's own proportions). Keep images around 1200 px on the long edge
 and under 300 KB; always write a real `alt` description.
 
+### 3.4 Project videos
+
+Three projects embed their YouTube video beside the text, alternating sides. The IROS and
+e-Yantra videos sit on the right, the ICRA one on the left, and on a phone each video drops
+below its text.
+
+Each embed starts at 8 seconds, which is a guess to skip the title card. To start a video at a
+better moment, edit the `start=` value in `research.html` (the number is in seconds):
+
+```html
+<iframe src="https://www.youtube-nocookie.com/embed/xo2cXRYdDPQ?start=8&amp;rel=0"
+```
+
+The embeds use youtube-nocookie.com, so no tracking cookies are set until a visitor presses
+play. Each one also has an "Open on YouTube" link underneath, which still works if an embed is
+ever blocked.
+
+### 3.5 If a YouTube video shows "Error 153"
+
+Error 153 means YouTube did not receive a usable `Referer` header from the page, so it refuses
+to start the player. The video itself is fine, and the "Open on YouTube" link below each embed
+still works.
+
+It almost always means the page was opened straight from disk, so the address bar reads
+`file:///home/...` rather than `http://`. A `file://` page has no origin, so the browser sends
+no `Referer` at all. Serve the folder over HTTP instead:
+
+```bash
+cd manas-juvvi-website
+python3 -m http.server 8000
+```
+
+Then open `http://localhost:8000/research.html`. Once the site is live on GitHub Pages the
+problem disappears, because the page is served from a real https domain.
+
+The pages already do their part. Each iframe carries
+`referrerpolicy="strict-origin-when-cross-origin"`, which is what YouTube asks for, and
+`research.html` sets the same policy in a meta tag.
+
+If a particular embed still refuses to play, download your own video from YouTube and self-host
+it instead. Put the file in `videos/` and swap the `<iframe>` block for a `<video>` block,
+copying the pattern already used by the outdoor robot project. A self-hosted file never depends
+on YouTube's embed rules.
+
 ### 3.4 File layout
 
 Everything is already in the right folders. Unzip, then start the preview server from inside

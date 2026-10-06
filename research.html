@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Research &amp; Projects | Manas Sashank Juvvi</title>
 <meta name="description" content="Seven robotics projects covering certified reinforcement learning, temporal-logic planning, safe multi-robot exploration, F1TENTH racing, an outdoor rover, rough-terrain autonomy and multi-drone pick-and-place.">
 <meta name="author" content="Manas Sashank Juvvi">
@@ -63,7 +64,7 @@
           <div class="linkset"><a href="https://repository.tudelft.nl/record/uuid:e67b072a-05b1-430f-a1fb-e25cd8df5b10">Read the thesis</a></div>
         </div>
       </article>
-      <article class="project project--gallery rise" id="stl-planning">
+      <article class="project project--gallery rise project--video" id="stl-planning">
         <div class="project__text">
           <h3 class="project__title">Planning with deadlines for robots without a model</h3>
           <p class="project__meta">Sep 2023 to Mar 2024 &middot; IISc &middot; IROS 2025, equal-contribution first author &middot; Python, PyTorch, PPO, ROS Noetic</p>
@@ -73,7 +74,16 @@
             <ul><li>Entirely model-free. The same policy library is reused across tasks and environments without retraining.</li><li>Tested on a TurtleBot3 with goals in fixed time windows, a timed obstacle and a return-to-start task, and on a Unitree Go1 quadruped that replanned to bridge the sim-to-real gap.</li><li>Probabilistically complete as the number of samples grows.</li></ul>
           </div>
           <p class="project__result"><strong>Result.</strong> Plans generated in 4.8&nbsp;s on average for the first task and 3.6&nbsp;s for the second, with every specification satisfied on real hardware.</p>
-          <div class="linkset"><a href="https://ieeexplore.ieee.org/document/11247417">Paper</a><a href="https://arxiv.org/abs/2507.13225">arXiv</a><a href="https://youtu.be/xo2cXRYdDPQ">Watch the video</a></div>
+          <div class="linkset"><a href="https://ieeexplore.ieee.org/document/11247417">Paper</a><a href="https://arxiv.org/abs/2507.13225">arXiv</a></div>
+        </div>
+        <div class="project__video">
+          <div class="vframe">
+            <iframe src="https://www.youtube.com/embed/xo2cXRYdDPQ?start=8&amp;rel=0"
+                    title="Project video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+          </div>
+          <p class="vcap">TurtleBot3 and Unitree Go1 executing STL-compliant plans. <a href="https://youtu.be/xo2cXRYdDPQ">Open on YouTube</a></p>
         </div>
         <div class="project__media">
           <figure class="shot shot--crop"><img src="assets/img/projects/stl-quadruped-arena.jpg" alt="Unitree Go1 quadruped in a test arena with two static obstacles, a timed obstacle and a goal region" loading="lazy" decoding="async"><figcaption>Unitree Go1 in the test arena. It must reach G while avoiding two static obstacles and a timed obstacle TO.</figcaption></figure>
@@ -81,7 +91,7 @@
           <figure class="shot "><img src="assets/img/projects/stl-quadruped-plan.jpg" alt="Plot of the quadruped's planned and executed path around a timed obstacle to the goal" loading="lazy" decoding="async"><figcaption>Go1 plan and execution, including the replanned segment around the timed obstacle.</figcaption></figure>
         </div>
       </article>
-      <article class="project project--gallery rise" id="multi-robot">
+      <article class="project project--gallery rise project--video project--flip" id="multi-robot">
         <div class="project__text">
           <h3 class="project__title">Multi-robot exploration with safety guarantees</h3>
           <p class="project__meta">Apr 2023 to Sep 2023 &middot; IISc &middot; ICRA 2024, equal-contribution first author &middot; C++, Python, ROS Noetic, GMapping</p>
@@ -91,7 +101,16 @@
             <ul><li>Targets are ranked to finish small unexplored pockets first, which stops robots oscillating between regions.</li><li>Validated in simulation on mixed teams of two and three robots (a differential-drive TurtleBot3 and omnidirectional robots), and on a two-robot team in the lab.</li><li>Benchmarked against Multi-RRT and frontier-based exploration over 75 runs on three maps with five starting points each.</li></ul>
           </div>
           <p class="project__result"><strong>Result.</strong> Zero collisions with obstacles or other robots, exploration in about half the time of both baselines or less, and cleaner maps, since collisions distorted the baselines' maps.</p>
-          <div class="linkset"><a href="https://ieeexplore.ieee.org/document/10610520">Paper</a><a href="https://youtu.be/NX40bgxskQc">Watch the video</a></div>
+          <div class="linkset"><a href="https://ieeexplore.ieee.org/document/10610520">Paper</a></div>
+        </div>
+        <div class="project__video">
+          <div class="vframe">
+            <iframe src="https://www.youtube.com/embed/NX40bgxskQc?start=8&amp;rel=0"
+                    title="Project video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+          </div>
+          <p class="vcap">Two robots exploring an unknown map without a single collision. <a href="https://www.youtube.com/watch?v=NX40bgxskQc">Open on YouTube</a></p>
         </div>
         <div class="project__media">
           <figure class="shot "><img src="assets/img/projects/mre-safe-targets.jpg" alt="Occupancy grid during exploration with a target window inside a safety window next to the frontier" loading="lazy" decoding="async"><figcaption>Exploration in progress. The target window (brown) sits inside a safety window (green), with the frontier window (red) around it.</figcaption></figure>
@@ -110,7 +129,7 @@
           <p class="project__result"><strong>Result.</strong> More accurate state prediction at high speed, and a planner that drives aggressively where the risk is low and carefully where it is not.</p>
         </div>
       </article>
-      <article class="project rise" id="rover">
+      <article class="project rise project--video" id="rover">
         <div class="project__text">
           <h3 class="project__title">An outdoor robot, from sketch to field test</h3>
           <p class="project__meta">Jan 2023 to Jun 2024 &middot; IISc &middot; Jetson Xavier NX, OAK-D, Arduino, C++, Python, ROS</p>
@@ -119,6 +138,25 @@
             <p><strong>What I built.</strong> I designed and built it end to end, covering electronics, mechanical assembly, low-level control and autonomy. An OAK-D depth camera on a Jetson Xavier NX classifies the terrain and detects target objects. When it spots one, the robot drives towards it and stops at a set distance. Low-level control uses prescribed-performance control, and ROS packages handle navigation and exploration.</p>
           </div>
           <p class="project__result"><strong>Result.</strong> A field-tested prototype, hardened against changing light, uneven ground and noisy detections.</p>
+        </div>
+        <div class="project__video">
+          <div class="vframe">
+            <video controls preload="metadata" playsinline>
+              <source src="videos/rover.mp4" type="video/mp4">
+              Your browser cannot play this video. <a href="videos/rover.mp4">Download it instead</a>.
+            </video>
+          </div>
+          <p class="vcap">The rover under test, classifying terrain and driving to a detected object.</p>
+
+          <!-- Second clip. Delete this whole block if you only have one video,
+               or copy it again for a third. Keep the file in the videos folder. -->
+          <div class="vframe vframe--stacked">
+            <video controls preload="metadata" playsinline>
+              <source src="videos/rover-2.mp4" type="video/mp4">
+              Your browser cannot play this video. <a href="videos/rover-2.mp4">Download it instead</a>.
+            </video>
+          </div>
+          <p class="vcap">Field testing on uneven outdoor ground.</p>
         </div>
       </article>
       <article class="project rise" id="eth">
@@ -132,7 +170,7 @@
           <p class="project__result"><strong>Result.</strong> The integrated stack carried out the search-and-rescue mission.</p>
         </div>
       </article>
-      <article class="project rise" id="eyantra">
+      <article class="project rise project--video project--flip" id="eyantra">
         <div class="project__text">
           <h3 class="project__title">Vision-guided pick-and-place with a drone fleet</h3>
           <p class="project__meta">Sep 2021 to Sep 2022 &middot; e-Yantra Robotics Competition, IIT Bombay &middot; Python, OpenCV, ROS, PX4</p>
@@ -141,9 +179,18 @@
             <p><strong>What I built.</strong> Our team located boxes with ArUco markers and trucks with colour and contour detection, then fed those positions into a ROS and PX4 pipeline that guided each drone to its pick and place targets.</p>
           </div>
           <p class="project__result"><strong>Result.</strong> Grand Finals, top 8 of more than 250 teams.</p>
-          <div class="linkset"><a href="https://github.com/mrr-codes/eyrc_tasks">Code</a><a href="https://www.youtube.com/watch?v=nvedhA33nsk">Watch the video</a></div>
+          <div class="linkset"><a href="https://github.com/mrr-codes/eyrc_tasks">Code</a></div>
         </div>
-      </article>
+              <div class="project__video">
+          <div class="vframe">
+            <iframe src="https://www.youtube.com/embed/nvedhA33nsk?start=8&amp;rel=0"
+                    title="Project video" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+          </div>
+          <p class="vcap">Quadcopters locating boxes and loading them onto trucks. <a href="https://www.youtube.com/watch?v=nvedhA33nsk">Open on YouTube</a></p>
+        </div>
+</article>
 
     </div>
   </div>
