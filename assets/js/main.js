@@ -37,8 +37,12 @@
           io.unobserve(entry.target);
         }
       });
-    }, { rootMargin: "0px 0px -6% 0px", threshold: 0.05 });
+    }, { rootMargin: "0px 0px -6% 0px", threshold: 0 });
     items.forEach(function (el) { io.observe(el); });
+    // Safety net: never leave content hidden if the observer misbehaves
+    setTimeout(function () {
+      items.forEach(function (el) { el.classList.add("is-in"); });
+    }, 1500);
   }
 
   // Autoplay videos when their project scrolls into view, pause when it leaves
